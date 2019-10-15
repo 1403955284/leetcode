@@ -9,6 +9,11 @@ import java.util.LinkedList;
 
 // @lc code=start
 class Solution {
+    /**
+     * 从最外围开始每次寻找’O‘的点，将其标记为’#‘，然后寻找与之相邻的所有’O‘点标记为‘#’
+     * 最后剩下来的’O‘替换为’X‘
+     * 再将所有’#‘换回’O‘
+     */
     public void solve(char[][] board) {
         if(board==null||board.length==0||board[0].length==0){
             return;
