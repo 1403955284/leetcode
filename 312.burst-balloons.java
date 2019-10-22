@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
     public int maxCoins(int[] nums) {
-        // 从i到j能取得的最大硬币数
+        // 从i到j能取得的最大数,为了方便统一，均不包含边界点i和j;
         int[][] dp = new int[nums.length + 2][nums.length + 2];
         int[] newNums = new int[nums.length + 2];
         newNums[0] = 1;

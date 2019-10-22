@@ -49,15 +49,15 @@ class Solution {
 
 
         /**
-         * 利用BST
+         * 利用BST,未调通
          */
-        List<Integer> ans = new LinkedList<>();
-        Node root = null;
-        for(int i = nums.length-1;i>=0;i--){
-            ans.add(insert(root,nums[i]));
-        }
-        Collections.reverse(ans);
-        return ans;
+        // List<Integer> ans = new LinkedList<>();
+        // Node root = null;
+        // for(int i = nums.length-1;i>=0;i--){
+        //     ans.add(insert(root,nums[i]));
+        // }
+        // Collections.reverse(ans);
+        // return ans;
     }
 
     public int insert(Node root,int val){
