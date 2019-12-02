@@ -24,6 +24,9 @@ class Solution {
         return ans;
     }
 
+    /**
+     * 标记路径为一个Sring序列
+     */
     public String path(TreeNode root, Map<String, Integer> mark, List<TreeNode> ans) {
         if (root != null) {
             String curString = root.val + path(root.left, mark, ans) + path(root.right, mark, ans);
