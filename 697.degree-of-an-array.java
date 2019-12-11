@@ -38,6 +38,23 @@ class Solution {
         });
         return ans[0];
 
+        // // ========================== 29% ===========================
+        // Map<Integer,Integer> count = new HashMap<>();
+        // Map<Integer,Integer> first = new HashMap<>();
+        // int degree = 0;
+        // int ans = 0;
+        // for(int i = 0;i<nums.length;i++){
+        //     first.putIfAbsent(nums[i], i);
+        //     count.put(nums[i], count.getOrDefault(nums[i],0)+1);
+        //     if(degree<count.get(nums[i])){
+        //         degree = count.get(nums[i]);
+        //         ans = i-first.get(nums[i])+1;
+        //     }else if(degree==count.get(nums[i])){
+        //         ans = Math.min(ans, i-first.get(nums[i])+1);
+        //     }
+        // }
+        // return ans;
+
     }
 }
 // @lc code=end
