@@ -86,6 +86,30 @@ class Solution {
             }
         }
         return ans;
+
+
+        // // ================== 简易版本 =====================
+
+        // int[] index = new int[26];
+        // List<Integer> ans = new ArrayList<>();
+        // if(S==null||S.length()==0){
+        //     return ans;
+        // }
+        // for(int i = 0;i<S.length();i++){
+        //     index[S.charAt(i)-'a'] = i; 
+        // }
+        // int start = 0;
+        // int max = 0;
+        // for(int i = 0;i<S.length();i++){
+        //     max = Math.max(max, index[S.charAt(i)-'a']);
+        //     if(max==i){
+        //         ans.add(max-start+1);
+        //         start = max+1;
+        //     }
+        // }
+        // return ans;
+
+
     }
     // "eccbbbbdec"
     // "caedbdedda"
