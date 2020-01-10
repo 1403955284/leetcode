@@ -27,6 +27,7 @@ class Solution {
         if (K < 0) {
             return 0;
         }
+        // 记录从0到i-1分k个子数组的情况下所能获得的最大平均数和
         double[][] dp = new double[A.length][K+1];
         int[] sum = new int[A.length];
         int curr = 0;
