@@ -12,39 +12,44 @@ import java.util.List;
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
+        if (nums == null || nums.length < 3) {
+            return ans;
+        }
         Arrays.sort(nums);
-        int prev = Integer.MIN_VALUE;
-        for(int i = 0;i<=nums.length-3;i++){
-            if(prev == nums[i]){
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
-            prev = nums[i];
-            int L= i+1;
-            int R = nums.length-1;
-            while(L<R){
-                if(nums[i]+nums[L]+nums[R]==0){
+            int L = i + 1;
+            int R = nums.length - 1;
+            while (L < R) {
+                int sum = nums[i] + nums[L] + nums[R];
+                if (sum == 0) {
                     List<Integer> cur = new ArrayList<>();
                     cur.add(nums[i]);
                     cur.add(nums[L]);
                     cur.add(nums[R]);
                     ans.add(cur);
-                    while(L<R&&nums[L]==nums[L+1]){
+                    while (L < R && nums[L] == nums[L + 1]) {
                         L++;
                     }
-                    while(L<R&&nums[R]==nums[R-1]){
+                    while (L < R && nums[R] == nums[R - 1]) {
                         R--;
                     }
                     L++;
                     R--;
-                }else if(nums[i]+nums[L]+nums[R]<0){
+                } else if (sum < 0) {
                     L++;
-                }else{
+                } else if (sum > 0) {
                     R--;
                 }
             }
         }
         return ans;
+
     }
 }
 // @lc code=end
-
