@@ -8,12 +8,7 @@
 // @lc code=start
 public class Solution {
     public int reverseBits(int n) {
-        String target = Integer.toBinaryString(n);
-        System.out.print(target);
-        StringBuilder stringBuilder = new StringBuilder(target);
-        stringBuilder.reverse();
-        return Integer.parseInt(stringBuilder.toString(), 2);
+        return Integer.reverse(n);
     }
 }
 // @lc code=end
-
