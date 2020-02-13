@@ -19,31 +19,17 @@ class MinStack {
     }
 
     public void push(int x) {
-        // ========================= 第一种实现方式 ===========================
-        // stackData.push(x);
-        // if (minData.isEmpty() || minData.peek() >= x) {
-        // minData.push(x);
-        // }
-
-        // ================================ 第二种实现方式 =====================
         stackData.push(x);
         if (minData.isEmpty() || minData.peek() >= x) {
             minData.push(x);
-        } else {
-            minData.push(minData.peek());
         }
     }
 
     public void pop() {
-        // ====================== 第一种实现方式 ========================
-        // int cur = stackData.pop();
-        // if (minData.peek() == cur) {
-        // minData.pop();
-        // }
-
-        // ======================== 第二种实现方式 =======================
-        stackData.pop();
-        minData.pop();
+        int cur = stackData.pop();
+        if (minData.peek() == cur) {
+            minData.pop();
+        }
     }
 
     public int top() {
