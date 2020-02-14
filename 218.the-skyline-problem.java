@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.TreeMap;
 
 /*
  * @lc app=leetcode id=218 lang=java
@@ -13,36 +12,55 @@ import java.util.TreeMap;
 // @lc code=start
 class Solution {
     public List<List<Integer>> getSkyline(int[][] buildings) {
-        List<List<Integer>> ans = new ArrayList<>();
-        TreeMap<Integer, Integer> height = new TreeMap<>();
-        for (int[] cur : buildings) {
-            for (int i = cur[0]; i <= cur[1]; i++) {
-                if (height.containsKey(i)) {
-                    height.put(i, Math.max(height.get(i), cur[2]));
-                } else {
-                    height.put(i, cur[2]);
+        List<int[]> points = new ArrayList<>();
+        for (int[] b : buildings) {
+            points.add(new int[] { b[0], 0 });
+            points.add(new int[] { b[1], 0 });
+        }
+
+        Collections.sort(points, new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) {
+                return a[0] - b[0];
+            }
+        });
+
+        for (int[] b : buildings) {
+            for (int[] p : points) {
+                if (p[0] >= b[0] && p[0] < b[1]) {
+                    p[1] = Math.max(p[1], b[2]);
                 }
             }
         }
-        int prev = -1;
-        int lastKey = 0;
-        for (int key : height.keySet()) {
-            lastKey = key;
-            if (prev == -1) {
-                prev = height.get(key);
-                List<Integer> tmp = new ArrayList<>();
-                tmp.add(key);
-                tmp.add(height.get(key));
-                ans.add(tmp);
-            } else if (!height.containsKey(key + 1) || prev != height.get(key + 1)) {
-                prev = !height.containsKey(key + 1) ? 0 : height.get(key + 1);
-                List<Integer> tmp = new ArrayList<>();
-                tmp.add(key);
-                tmp.add(prev);
-                ans.add(tmp);
+
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> prev = null;
+        for (int[] p : points) {
+            if (prev == null) {
+                List<Integer> list = new ArrayList<>();
+                list.add(p[0]);
+                list.add(p[1]);
+                res.add(list);
+                prev = list;
+            } else if (prev.get(0) == p[0]) {
+                if (prev.get(1) == p[1])
+                    continue;
+                if (prev.get(1) < p[1]) {
+                    res.remove(prev);
+                }
+                List<Integer> list = new ArrayList<>();
+                list.add(p[0]);
+                list.add(p[1]);
+                res.add(list);
+                prev = list;
+            } else if (prev.get(1) != p[1]) {
+                List<Integer> list = new ArrayList<>();
+                list.add(p[0]);
+                list.add(p[1]);
+                res.add(list);
+                prev = list;
             }
         }
-        return ans;
+        return res;
     }
 }
 // @lc code=end
