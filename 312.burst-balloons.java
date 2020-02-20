@@ -15,14 +15,12 @@ class Solution {
         for (int i = 0, j = 1; i < nums.length; i++, j++) {
             newNums[j] = nums[i];
         }
-        for (int des = 2; des < nums.length+2; des++) {
-            for (int i = 0; i + des <nums.length+2; i++) {
+        for (int des = 2; des < nums.length + 2; des++) {
+            for (int i = 0; i + des < nums.length + 2; i++) {
                 int j = i + des;
-                for (int k = i+1; k < j; k++) {
-                    dp[i][j] = Math.max(dp[i][j],
-                            dp[i][k] + newNums[i] * newNums[k] * newNums[j] + dp[k][j]);
+                for (int k = i + 1; k < j; k++) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i][k] + newNums[i] * newNums[k] * newNums[j] + dp[k][j]);
                 }
-
             }
         }
         return dp[0][nums.length + 1];

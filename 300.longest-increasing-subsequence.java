@@ -1,6 +1,3 @@
-import java.util.Arrays;
-import java.util.Stack;
-
 /*
  * @lc app=leetcode id=300 lang=java
  *

@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -10,33 +10,39 @@ import java.util.List;
 // @lc code=start
 class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        int[] test = new int[26];
-        int length = p.length();
-        List<Integer> ans = new LinkedList<>();
-        for (char cur : p.toCharArray()) {
-            test[cur - 'a']++;
+        if (s == null || s.length() == 0)
+            return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        int[] needs = new int[26]; // 由于都是小写字母，因此直接用26个长度的数组代替原来的HashMap
+        int[] window = new int[26];
+        int left = 0, right = 0, total = p.length(); // 用total检测窗口中是否已经涵盖了p中的字符
+        for (char ch : p.toCharArray()) {
+            needs[ch - 'a']++;
         }
-        for (int i = 0; i <= s.length() - length; i++) {
-            String str = s.substring(i, i + length);
-            if (isSame(str, test)) {
-                ans.add(i);
+        while (right < s.length()) {
+            char chr = s.charAt(right);
+            if (needs[chr - 'a'] > 0) {
+                window[chr - 'a']++;
+                if (window[chr - 'a'] <= needs[chr - 'a']) {
+                    total--;
+                }
             }
-        }
-        return ans;
-    }
-
-    public boolean isSame(String str, int[] test) {
-        int[] tmp = new int[26];
-        for (char cur : str.toCharArray()) {
-            tmp[cur - 'a']++;
-        }
-
-        for (int i = 0; i < 26; i++) {
-            if (test[i] != tmp[i]) {
-                return false;
+            while (total == 0) {
+                if (right - left + 1 == p.length()) {
+                    res.add(left);
+                }
+                char chl = s.charAt(left);
+                if (needs[chl - 'a'] > 0) {
+                    window[chl - 'a']--;
+                    if (window[chl - 'a'] < needs[chl - 'a']) {
+                        total++;
+                    }
+                }
+                left++;
             }
+            right++;
         }
-        return true;
+        return res;
     }
 }
 // @lc code=end
