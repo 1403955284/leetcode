@@ -12,7 +12,8 @@ class Solution {
     public List<Integer> sortArray(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
-        quickSort(nums, low, high);
+        heapSort(nums);
+        // quickSort(nums, low, high);
         // insertSort(nums);
         // mergeSort(nums, low, high);
         // bubbleSort(nums);
@@ -122,6 +123,41 @@ class Solution {
         }
     }
     // =============================================================
+
+    // ========================= 堆排序 O(nlogn)============================
+
+    public void heapSort(int[] data) {
+        for (int i = data.length / 2 - 1; i >= 0; i--) {
+            adjHeadp(data, i, data.length);
+        }
+        for (int j = data.length - 1; j > 0; j--) {
+            swap(data, 0, j);
+            adjHeadp(data, 0, j);
+        }
+    }
+
+    public void swap(int[] data, int i, int j) {
+        int temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+    }
+
+    public void adjHeadp(int[] data, int index, int length) {
+        int temp = data[index];
+        for (int k = 2 * index + 1; k < length; k = 2 * k + 1) {
+            if (k + 1 < length && data[k] < data[k + 1]) {
+                k++;
+            }
+            if (data[index] < data[k]) {
+                data[index] = data[k];
+                index = k;
+            } else {
+                break;
+            }
+            data[k] = temp;
+        }
+    }
+    // =====================================================================
 
 }
 // @lc code=end
