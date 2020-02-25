@@ -14,12 +14,10 @@ class Solution {
         if (root == null) {
             return null;
         }
-        TreeNode tmp = root.left;
-        root.left = root.right;
-        root.right = tmp;
-        invertTree(root.left);
-        invertTree(root.right);
-        return root;
+        TreeNode ans = new TreeNode(root.val);
+        ans.left = invertTree(root.right);
+        ans.right = invertTree(root.left);
+        return ans;
     }
 }
 // @lc code=end
