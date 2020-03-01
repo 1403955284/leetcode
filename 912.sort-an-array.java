@@ -127,12 +127,13 @@ class Solution {
     // ========================= 堆排序 O(nlogn)============================
 
     public void heapSort(int[] data) {
-        for (int i = data.length / 2 - 1; i >= 0; i--) {
-            adjHeadp(data, i, data.length);
+        int size = data.length;
+        for (int i = size / 2 - 1; i >= 0; i--) {
+            adjust(data, size, i);
         }
-        for (int j = data.length - 1; j > 0; j--) {
+        for (int j = size - 1; j >= 1; j--) {
             swap(data, 0, j);
-            adjHeadp(data, 0, j);
+            adjust(data, j, 0);
         }
     }
 
@@ -142,20 +143,21 @@ class Solution {
         data[j] = temp;
     }
 
-    public void adjHeadp(int[] data, int index, int length) {
-        int temp = data[index];
-        for (int k = 2 * index + 1; k < length; k = 2 * k + 1) {
-            if (k + 1 < length && data[k] < data[k + 1]) {
-                k++;
-            }
-            if (data[index] < data[k]) {
-                data[index] = data[k];
-                index = k;
-            } else {
-                break;
-            }
-            data[k] = temp;
+    public void adjust(int[] nums, int len, int index) {
+        int l = 2 * index + 1;
+        int r = 2 * index + 2;
+        int maxIndex = index;
+        if (l < len && nums[l] > nums[maxIndex]) {
+            maxIndex = l;
         }
+        if (r < len && nums[r] > nums[maxIndex]) {
+            maxIndex = r;
+        }
+        if (maxIndex != index) {
+            swap(nums, index, maxIndex);
+            adjust(nums, len, maxIndex);
+        }
+
     }
     // =====================================================================
 

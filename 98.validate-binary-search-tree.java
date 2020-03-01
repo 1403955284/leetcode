@@ -1,3 +1,7 @@
+import java.util.Stack;
+
+import javax.swing.tree.TreeNode;
+
 /*
  * @lc app=leetcode id=98 lang=java
  *
@@ -11,7 +15,38 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+        // ===================递归============================
+        // return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+
+        // ================ 非递归 ===================
+
+        if (root == null) {
+            return true;
+        }
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        int prev = Integer.MIN_VALUE;
+        boolean flag = true;
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                root = stack.pop();
+                if (flag) {
+                    flag = false;
+                } else {
+                    if (prev >= root.val) {
+                        return false;
+                    }
+                }
+                prev = root.val;
+                root = root.right;
+            }
+        }
+        return true;
     }
 
     public boolean isValidBST(TreeNode root, long minVal, long maxVal) {
