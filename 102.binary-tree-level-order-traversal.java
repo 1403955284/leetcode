@@ -18,44 +18,26 @@ import javax.swing.tree.TreeNode;
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        Queue<TreeNode> queue1 = new LinkedList<>();
-        Queue<TreeNode> queue2 = new LinkedList<>();
-        List<List<Integer>> ans = new ArrayList<>();
-        if (root == null) {
-            return ans;
+        if (root == null)
+            return new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            List<Integer> list = new ArrayList<Integer>();
+            while (count > 0) {
+                TreeNode node = queue.poll();
+                list.add(node.val);
+                if (node.left != null)
+                    queue.add(node.left);
+                if (node.right != null)
+                    queue.add(node.right);
+                count--;
+            }
+            res.add(list);
         }
-        queue1.add(root);
-        while (!queue1.isEmpty() || !queue2.isEmpty()) {
-            List<Integer> tmp1 = new ArrayList<>();
-            while (!queue1.isEmpty()) {
-                TreeNode cur = queue1.poll();
-                tmp1.add(cur.val);
-                if (cur.left != null) {
-                    queue2.add(cur.left);
-                }
-                if (cur.right != null) {
-                    queue2.add(cur.right);
-                }
-            }
-            if (tmp1.size() != 0) {
-                ans.add(tmp1);
-            }
-            List<Integer> tmp2 = new ArrayList<>();
-            while (!queue2.isEmpty()) {
-                TreeNode cur = queue2.poll();
-                tmp2.add(cur.val);
-                if (cur.left != null) {
-                    queue1.add(cur.left);
-                }
-                if (cur.right != null) {
-                    queue1.add(cur.right);
-                }
-            }
-            if (tmp2.size() != 0) {
-                ans.add(tmp2);
-            }
-        }
-        return ans;
+        return res;
     }
 }
 // @lc code=end
