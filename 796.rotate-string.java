@@ -51,29 +51,29 @@ class Solution {
 
             // cn表示一直表示当前pos前一个索引位置(pos-1)所对应的next值，不管上次遍历中处理了几次 cn = next[cn]
 
-            // int cn = 0;
-            // while (pos < next.length) {
-            // if (pat.charAt(pos - 1) == pat.charAt(cn)) {
-            // next[pos++] = ++cn;
-            // } else if (cn > 0) {
-            // cn = next[cn];
-            // } else {
-            // next[pos++] = 0;
-            // }
-            // }
-
-            // 上面的解法中cn的处理无法理解，自行改为下面的方式
-            for (int i = pos; i < next.length; i++) {
-                int cn = next[pos - 1];
-                while (cn >= 0 && pat.charAt(i - 1) != pat.charAt(cn)) {
+            int cn = 0;
+            while (pos < next.length) {
+                if (pat.charAt(pos - 1) == pat.charAt(cn)) {
+                    next[pos++] = ++cn;
+                } else if (cn > 0) {
                     cn = next[cn];
-                }
-                if (cn < 0) {
-                    next[pos] = 0;
-                } else if (pat.charAt(i - 1) != pat.charAt(cn)) {
-                    next[pos] = next[cn] + 1;
+                } else {
+                    next[pos++] = 0;
                 }
             }
+
+            // // 上面的解法中cn的处理无法理解，自行改为下面的方式
+            // for (int i = pos; i < next.length; i++) {
+            // int cn = next[pos - 1];
+            // while (cn >= 0 && pat.charAt(i - 1) != pat.charAt(cn)) {
+            // cn = next[cn];
+            // }
+            // if (cn < 0) {
+            // next[pos] = 0;
+            // } else if (pat.charAt(i - 1) != pat.charAt(cn)) {
+            // next[pos] = next[cn] + 1;
+            // }
+            // }
         }
         // 尝试匹配
         int ti = 0;
