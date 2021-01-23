@@ -11,16 +11,16 @@ import java.util.Map;
 class Solution {
     public int lengthOfLongestSubstring(String s) {
         int ans = 0;
-        Map<Character,Integer> record = new HashMap<>();
+        Map<Character, Integer> record = new HashMap<>();
         int left = 0;
         int right = 0;
-        while(right<s.length()){
-            if(!record.containsKey(s.charAt(right))||record.get(s.charAt(right))==0){
+        while (right < s.length()) {
+            if (!record.containsKey(s.charAt(right)) || record.get(s.charAt(right)) == 0) {
                 record.put(s.charAt(right), 1);
                 right++;
-            }else{
-                ans = Math.max(ans, right-left);
-                while(s.charAt(left)!=s.charAt(right)){
+            } else {
+                ans = Math.max(ans, right - left);
+                while (s.charAt(left) != s.charAt(right)) {
                     record.put(s.charAt(left), 0);
                     left++;
                 }
@@ -28,8 +28,7 @@ class Solution {
                 right++;
             }
         }
-        return Math.max(ans, right-left);
+        return Math.max(ans, right - left);
     }
 }
 // @lc code=end
-
