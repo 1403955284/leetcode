@@ -10,7 +10,8 @@ class Solution {
         d = 'L' + d + 'R';
         StringBuilder res = new StringBuilder();
         for (int i = 0, j = 1; j < d.length(); ++j) {
-            if (d.charAt(j) == '.') continue;
+            if (d.charAt(j) == '.')
+                continue;
             int middle = j - i - 1;
             if (i > 0)
                 res.append(d.charAt(i));
@@ -32,7 +33,5 @@ class Solution {
         }
         return res.toString();
     }
-
 }
 // @lc code=end
-
